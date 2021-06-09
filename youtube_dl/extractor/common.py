@@ -630,6 +630,8 @@ class InfoExtractor(object):
         exceptions = [compat_urllib_error.URLError, compat_http_client.HTTPException, socket.error]
         if hasattr(ssl, 'CertificateError'):
             exceptions.append(ssl.CertificateError)
+        if hasattr(ssl, 'SSLEOFError'):
+            exceptions.append(ssl.SSLEOFError)
         try:
             return self._downloader.urlopen(url_or_request)
         except tuple(exceptions) as err:
